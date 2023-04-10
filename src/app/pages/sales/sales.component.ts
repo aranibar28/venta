@@ -36,13 +36,13 @@ export class SalesComponent implements OnInit {
 
   public myForm: FormGroup = this.fb.group({
     clienteid: ['', [Validators.required]],
-    serie: [null, [Validators.required]],
+    serie: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
     correlativo: [null, [Validators.required]],
     fecha: [null, [Validators.required]],
     subtotal: [0],
     igv: [0],
     total: [0],
-    details: [[]],
+    detalle: [[]],
   });
 
   ngOnInit(): void {
@@ -66,7 +66,7 @@ export class SalesComponent implements OnInit {
       this.myForm.get('subtotal')?.setValue(res.subtotal);
       this.myForm.get('igv')?.setValue(res.igv);
       this.myForm.get('total')?.setValue(res.total);
-      this.myForm.get('details')?.setValue(res.details);
+      this.myForm.get('detalle')?.setValue(res.details);
     });
   }
 
@@ -76,8 +76,12 @@ export class SalesComponent implements OnInit {
       return;
     }
     const total = this.myForm.get('total')?.value;
-    Swal.fire('OK', 'Venta generada, total: ' + total, 'success');
-    console.log(this.myForm.value);
+
+    this.service.post_venta(this.myForm.value).subscribe((res) => {
+      console.log(res);
+      console.log(this.myForm.value);
+      Swal.fire('OK', 'Venta generada, total: ' + total, 'success');
+    });
   }
 
   validators(item: string) {

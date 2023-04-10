@@ -32,4 +32,9 @@ export class ApiRestService {
     const url = `${base_url}/Venta/ObtenerClientes`;
     return this.http.get<Customer[]>(url, this.headers);
   }
+
+  post_venta(data: any): Observable<any> {
+    const url = `${base_url}/Venta/InsertarVenta`;
+    return this.http.post<any>(url, data, this.headers);
+  }
 }
