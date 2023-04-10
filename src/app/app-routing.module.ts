@@ -13,7 +13,7 @@ const routes: Routes = [
       { path: 'customers', component: CustomersComponent },
       { path: 'products', component: ProductsComponent },
       { path: 'sales', component: SalesComponent },
-      { path: '**', redirectTo: 'customers' },
+      { path: '**', redirectTo: 'sales' },
     ],
   },
 ];
