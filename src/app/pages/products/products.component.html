@@ -1,0 +1,25 @@
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">#</th>
+         <th scope="col">Titulo</th>
+         <th scope="col">Unidad Medida</th>
+         <th scope="col">Precio</th>
+      </tr>
+   </thead>
+   <tbody>
+      <ng-container *ngIf="loading">
+         <tr>
+            <td class="text-center text-warning" colspan="100%">Cargando...</td>
+         </tr>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+         <tr *ngFor="let product of products; index as i">
+            <th>{{ product.productoid }}</th>
+            <td>{{ product.nombre }}</td>
+            <td>{{ product.unidadmedida  }}</td>
+            <td>{{ product.preciosoles | currency  }}</td>
+         </tr>
+      </ng-container>
+   </tbody>
+</table>

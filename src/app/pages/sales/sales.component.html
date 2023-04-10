@@ -1,0 +1,59 @@
+<div class="container">
+   <form (ngSubmit)="onSubmit()" [formGroup]="myForm" autocomplete="off">
+      <div class="mb-3">
+         <label for="clienteInput" class="form-label">Cliente:</label>
+         <select formControlName="clienteid" class="form-control">
+            <option value="">Seleccionar</option>
+            <option *ngFor="let item of customers" [value]="item.clienteid">{{ item.nombrecompleto }}</option>
+         </select>
+         <span *ngIf="validators('clienteid')" class="text-danger">{{ message('clienteid', 'cliente') }}</span>
+      </div>
+      <div class="mb-3">
+         <div class="row">
+            <div class="col-6">
+               <label for="serieInput" class="form-label">Serie:</label>
+               <input formControlName="serie" type="text" class="form-control" placeholder="Ingrese la serie">
+               <span *ngIf="validators('serie')" class="text-danger">{{ message('serie', 'serie') }}</span>
+            </div>
+            <div class="col-6">
+               <label for="serieInput" class="form-label">Correlative:</label>
+               <input formControlName="correlativo" type="text" class="form-control" placeholder="Ingrese el correlativo">
+               <span *ngIf="validators('correlativo')" class="text-danger">{{ message('correlativo', 'correlativo') }}</span>
+            </div>
+         </div>
+      </div>
+      <div class="mb-3">
+         <label for="fechaInput" class="form-label">Fecha:</label>
+         <input formControlName="fecha" type="date" class="form-control" id="fechaInput">
+         <span *ngIf="validators('fecha')" class="text-danger">{{ message('fecha', 'fecha') }}</span>
+      </div>
+      <div class="mb-3">
+         <button (click)="openModal()" type="button" class="btn btn-primary">Agregar Productos</button>
+      </div>
+      <table class="table table-striped">
+         <thead>
+            <tr>
+               <th scope="col">Cantidad</th>
+               <th scope="col">Producto</th>
+               <th scope="col">Precio</th>
+               <th scope="col">IGV (18%)</th>
+               <th scope="col">Total</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr *ngIf="details.length === 0">
+               <th colspan="100%" class="text-center">No has seleccionados productos</th>
+            </tr>
+            <tr *ngFor="let item of details; index as i">
+               <th>{{ item.cantidad }}</th>
+               <td>{{ item.nombre }}</td>
+               <td>{{ item.precio | currency  }}</td>
+               <td>{{ item.precio * 0.18 | currency }}</td>
+               <td>{{ item.cantidad * item.precio | currency  }}</td>
+            </tr>
+         </tbody>
+      </table>
+      <button type="submit" class="btn btn-primary">Generar Venta</button>
+   </form>
+
+</div>

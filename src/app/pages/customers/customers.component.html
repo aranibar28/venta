@@ -1,0 +1,25 @@
+<table class="table table-striped">
+   <thead>
+      <tr>
+         <th scope="col">#</th>
+         <th scope="col">Nombres</th>
+         <th scope="col">DNI</th>
+         <th scope="col">Dirección</th>
+      </tr>
+   </thead>
+   <tbody>
+      <ng-container *ngIf="loading">
+         <tr>
+            <td class="text-center text-warning" colspan="100%">Cargando...</td>
+         </tr>
+      </ng-container>
+      <ng-container *ngIf="!loading">
+         <tr *ngFor="let product of customers; index as i">
+            <th>{{ product.clienteid }}</th>
+            <td>{{ product.nombrecompleto }}</td>
+            <td>{{ product.dni  }}</td>
+            <td>{{ product.direccion }}</td>
+         </tr>
+      </ng-container>
+   </tbody>
+</table>
